@@ -37,10 +37,10 @@ class APOD extends React.Component {
   render() {
     return (
       <>
-        <div className="left" id="apod-image">
-          <img src={this.state.imageSource} alt="APOD" />
+        <div className="left">
+          <img src={this.state.imageSource} alt="APOD" id="apod-image"/>
         </div>
-        <div className="reft" id="apod-description">
+        <div className="right" id="apod-description">
           <p id="image-title">{this.state.title}</p>
           <br />
           <p id="image-description">{this.state.description}</p>

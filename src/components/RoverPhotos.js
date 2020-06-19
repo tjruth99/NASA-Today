@@ -3,32 +3,53 @@ import React from "react";
 class RoverImage extends React.Component {
   constructor() {
     super();
-    this.state = { rover: "", imgUrl: "", camera: "" };
+    this.state = { rover: "", imgUrl: "", camera: "", date: "" };
   }
 
   componentDidMount() {
+    let camName = "";
+
+    switch (this.props.camera) {
+      case "FHAZ":
+        camName = "Front Hazard Avoidance Camera";
+        break;
+      case "RHAZ":
+        camName = "Rear Hazard Avoidance Camera";
+        break;
+      case "NAVCAM":
+        camName = "Navigation Camera";
+        break;
+      default:
+        camName = "I DONT KNOW";
+    }
+
+    console.log(this.props.date);
+
     this.setState({
       rover: this.props.rover,
       imgUrl: this.props.imgUrl,
-      camera: this.props.camera,
+      camera: camName,
+      date: this.props.date,
       num: parseInt(this.props.num) % 2,
     });
   }
 
   render() {
-    console.log(this.state.num);
     if (this.state.num === 0) {
       return (
         <>
           <div className="left" id="rover-description">
-            <p>
-              {this.state.rover} Camera: {this.state.camera}
+            <p id="image-title">
+              {this.state.rover}'s {this.state.camera}
             </p>
+            <br />
+            <p id="image-description">Image taken on {this.state.date}</p>
           </div>
-          <div className="right" id="rover-image">
+          <div className="right">
             <img
               src={this.state.imgUrl}
               alt={this.state.rover + "_" + this.state.camera}
+              id="rover-image"
             />
           </div>
         </>
@@ -36,16 +57,19 @@ class RoverImage extends React.Component {
     } else {
       return (
         <>
-          <div className="left" id="rover-image">
+          <div className="left">
             <img
               src={this.state.imgUrl}
               alt={this.state.rover + "_" + this.state.camera}
+              id="rover-image"
             />
           </div>
           <div className="right" id="rover-description">
-            <p>
-              {this.state.rover} Camera: {this.state.camera}
+            <p id="image-title">
+              {this.state.rover}'s {this.state.camera}
             </p>
+            <br />
+            <p id="image-description">Image taken on {this.state.date}</p>
           </div>
         </>
       );
@@ -113,14 +137,21 @@ class CuriosityPictures extends React.Component {
     let n = 0;
     return (
       <>
-        {this.state.photos.map((i) => (
-          <RoverImage
-            rover={i.rover.name}
-            imgUrl={i.img_src}
-            camera={i.camera.name}
-            num={n++}
-          />
-        ))}
+        {this.state.photos.map((i) => {
+          if (i.camera.name !== "CHEMCAM") {
+            return (
+              <RoverImage
+                rover={i.rover.name}
+                imgUrl={i.img_src}
+                camera={i.camera.name}
+                date={this.state.date}
+                num={n++}
+              />
+            );
+          } else {
+            return "";
+          }
+        })}
       </>
     );
   }
