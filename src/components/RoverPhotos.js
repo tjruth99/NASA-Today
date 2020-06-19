@@ -1,5 +1,58 @@
 import React from "react";
 
+class RoverImage extends React.Component {
+  constructor() {
+    super();
+    this.state = { rover: "", imgUrl: "", camera: "" };
+  }
+
+  componentDidMount() {
+    this.setState({
+      rover: this.props.rover,
+      imgUrl: this.props.imgUrl,
+      camera: this.props.camera,
+      num: parseInt(this.props.num) % 2,
+    });
+  }
+
+  render() {
+    console.log(this.state.num);
+    if (this.state.num === 0) {
+      return (
+        <>
+          <div className="left" id="rover-description">
+            <p>
+              {this.state.rover} Camera: {this.state.camera}
+            </p>
+          </div>
+          <div className="right" id="rover-image">
+            <img
+              src={this.state.imgUrl}
+              alt={this.state.rover + "_" + this.state.camera}
+            />
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className="left" id="rover-image">
+            <img
+              src={this.state.imgUrl}
+              alt={this.state.rover + "_" + this.state.camera}
+            />
+          </div>
+          <div className="right" id="rover-description">
+            <p>
+              {this.state.rover} Camera: {this.state.camera}
+            </p>
+          </div>
+        </>
+      );
+    }
+  }
+}
+
 class CuriosityPictures extends React.Component {
   constructor() {
     super();
@@ -57,12 +110,18 @@ class CuriosityPictures extends React.Component {
   }
 
   render() {
+    let n = 0;
     return (
-      <div>
+      <>
         {this.state.photos.map((i) => (
-          <img src={i.img_src} alt="Curiosity" id="curiosity-image" />
+          <RoverImage
+            rover={i.rover.name}
+            imgUrl={i.img_src}
+            camera={i.camera.name}
+            num={n++}
+          />
         ))}
-      </div>
+      </>
     );
   }
 }

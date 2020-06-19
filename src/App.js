@@ -6,7 +6,7 @@ import CuriosityPictures from './components/RoverPhotos';
 
 function App() {
   return (
-    <div className="App">
+    <div className="container">
       <APOD />
       <CuriosityPictures />
     </div>
