@@ -50,6 +50,11 @@
   font-size: 35px;
 }
 
+#image-date {
+  font-size: 25px;
+  color: #aaaaaa;
+}
+
 #image-description {
   font-size: 20px;
 }

@@ -35,9 +35,10 @@ class APOD extends React.Component {
       })
       .then((data) => {
         let o = {
-          imageSource: data.hdurl,
+          imageSource: data.url,
           description: data.explanation,
           title: data.title,
+          date: data.date,
         };
         let newArray = this.state.images;
         newArray.push(o);
@@ -52,11 +53,16 @@ class APOD extends React.Component {
 
   componentDidMount() {
     let d = new Date();
-    let year = d.getFullYear();
-    let month = d.getMonth() + 1;
-    let day = d.getDate();
 
-    this.addToList(year, month, day);
+    for (let i = 0; i < 3; i++) {
+      let year = d.getFullYear();
+      let month = d.getMonth() + 1;
+      let day = d.getDate();
+
+      this.addToList(year, month, day);
+
+      d.setDate(d.getDate() - 1);
+    }
   }
 
   render() {
@@ -72,14 +78,16 @@ class APOD extends React.Component {
                   id="apod-image"
                   onClick={this.showModal}
                 />
+                <Modal onClose={this.showModal} show={this.state.show}>
+                  <div>
+                    <p id="image-title">{i.title}</p>
+                    <br />
+                    <p id="image-date">{i.date}</p>
+                    <br />
+                    <p id="image-description">{i.description}</p>
+                  </div>
+                </Modal>
               </div>
-              <Modal onClose={this.showModal} show={this.state.show}>
-                <div>
-                  <p id="image-title">{i.title}</p>
-                  <br />
-                  <p id="image-description">{i.description}</p>
-                </div>
-              </Modal>
             </>
           );
         })}
