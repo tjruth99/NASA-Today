@@ -9,7 +9,7 @@ function App() {
     <div className="app">
       <div className="container">
         <APOD />
-        <CuriosityPictures />
+        {/*<CuriosityPictures />*/}
       </div>
     </div>
   );

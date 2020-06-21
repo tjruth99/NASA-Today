@@ -1,32 +1,48 @@
 import React from "react";
+import Modal from "./Modal";
 
 class APOD extends React.Component {
   constructor() {
     super();
-    this.state = { imageSource: null, description: "", title: "" };
+    this.state = {
+      images: [],
+      show: false,
+    };
   }
 
-  componentDidMount() {
-    fetch(
-      "https://api.nasa.gov/planetary/apod?api_key=AaQ9U1djcIeHrpWVG2uEZeTuodH4QcoBngaoVsNI",
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    )
+  showModal = (e) => {
+    this.setState({
+      show: !this.state.show,
+    });
+  };
+
+  addToList(year, month, day) {
+    let date = year + "-" + month + "-" + day;
+    let request =
+      "https://api.nasa.gov/planetary/apod?date=" +
+      date +
+      "&api_key=AaQ9U1djcIeHrpWVG2uEZeTuodH4QcoBngaoVsNI";
+    console.log(request);
+    fetch(request, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data.hdurl);
-        this.setState({
+        let o = {
           imageSource: data.hdurl,
           description: data.explanation,
           title: data.title,
-        });
+        };
+        let newArray = this.state.images;
+        newArray.push(o);
+
+        this.setState({ images: newArray });
       })
       .catch((error) => {
         console.log(error);
@@ -34,17 +50,39 @@ class APOD extends React.Component {
       });
   }
 
+  componentDidMount() {
+    let d = new Date();
+    let year = d.getFullYear();
+    let month = d.getMonth() + 1;
+    let day = d.getDate();
+
+    this.addToList(year, month, day);
+  }
+
   render() {
     return (
       <>
-        <div className="left">
-          <img src={this.state.imageSource} alt="APOD" id="apod-image"/>
-        </div>
-        <div className="right" id="apod-description">
-          <p id="image-title">{this.state.title}</p>
-          <br />
-          <p id="image-description">{this.state.description}</p>
-        </div>
+        {this.state.images.map((i) => {
+          return (
+            <>
+              <div className="image-display">
+                <img
+                  src={i.imageSource}
+                  alt="APOD"
+                  id="apod-image"
+                  onClick={this.showModal}
+                />
+              </div>
+              <Modal onClose={this.showModal} show={this.state.show}>
+                <div>
+                  <p id="image-title">{i.title}</p>
+                  <br />
+                  <p id="image-description">{i.description}</p>
+                </div>
+              </Modal>
+            </>
+          );
+        })}
       </>
     );
   }
