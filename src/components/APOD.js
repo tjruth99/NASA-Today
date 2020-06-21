@@ -1,20 +1,13 @@
 import React from "react";
-import Modal from "./Modal";
+import ImageDisplay from "./ImageDisplay";
 
 class APOD extends React.Component {
   constructor() {
     super();
     this.state = {
       images: [],
-      show: false,
     };
   }
-
-  showModal = (e) => {
-    this.setState({
-      show: !this.state.show,
-    });
-  };
 
   addToList(year, month, day) {
     let date = year + "-" + month + "-" + day;
@@ -69,27 +62,7 @@ class APOD extends React.Component {
     return (
       <>
         {this.state.images.map((i) => {
-          return (
-            <>
-              <div className="image-display">
-                <img
-                  src={i.imageSource}
-                  alt="APOD"
-                  id="apod-image"
-                  onClick={this.showModal}
-                />
-                <Modal onClose={this.showModal} show={this.state.show}>
-                  <div>
-                    <p id="image-title">{i.title}</p>
-                    <br />
-                    <p id="image-date">{i.date}</p>
-                    <br />
-                    <p id="image-description">{i.description}</p>
-                  </div>
-                </Modal>
-              </div>
-            </>
-          );
+          return <ImageDisplay info={i} />;
         })}
       </>
     );
