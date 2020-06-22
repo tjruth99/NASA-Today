@@ -26,12 +26,21 @@ class ImageDisplay extends React.Component {
             onClick={this.showModal}
           />
           <Modal onClose={this.showModal} show={this.state.show}>
-            <div>
-              <p id="image-title">{this.props.info.title}</p>
-              <br />
-              <p id="image-date">{this.props.info.date}</p>
-              <br />
-              <p id="image-description">{this.props.info.description}</p>
+            <div className="modal-box">
+              <img
+                src={this.props.info.hdSource}
+                alt="APOD"
+                id="apod-hd-image"
+              />
+            </div>
+            <div className="modal-box">
+              <div className="modal-information">
+                <p id="image-title">{this.props.info.title}</p>
+                <br />
+                <p id="image-date">{this.props.info.date}</p>
+                <br />
+                <p id="image-description">{this.props.info.description}</p>
+              </div>
             </div>
           </Modal>
         </div>

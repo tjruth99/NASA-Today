@@ -34,9 +34,12 @@
 }
 
 .modal-content {
+  display: grid;
+  grid-template-columns: 50% 50%;
   margin: auto;
   background-color: black;
-  width: 60%;
+  width: 80%;
+  padding: 5px;
   height: minmax(50%, auto);
   border: 1px solid #ccc;
 }
@@ -45,8 +48,28 @@
   display: hidden;
 }
 
+.modal-box {
+  width: 100%;
+  height: auto;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.modal-information {
+  width: 100%;
+  height: auto;
+  margin: 2px;
+}
+
 .image-display {
   height: 50vh;
+}
+
+#apod-hd-image {
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
 }
 
 #image-title {

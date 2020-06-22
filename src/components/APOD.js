@@ -1,6 +1,8 @@
 import React from "react";
 import ImageDisplay from "./ImageDisplay";
 
+const NUM_OF_IMAGES = 9;
+
 class APOD extends React.Component {
   constructor() {
     super();
@@ -29,12 +31,16 @@ class APOD extends React.Component {
       .then((data) => {
         let o = {
           imageSource: data.url,
+          hdSource: data.hdurl,
           description: data.explanation,
           title: data.title,
           date: data.date,
         };
         let newArray = this.state.images;
         newArray.push(o);
+
+        newArray.sort((a, b) => (a.date < b.date ? 1 : -1));
+        console.log(newArray);
 
         this.setState({ images: newArray });
       })
@@ -47,7 +53,7 @@ class APOD extends React.Component {
   componentDidMount() {
     let d = new Date();
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < NUM_OF_IMAGES; i++) {
       let year = d.getFullYear();
       let month = d.getMonth() + 1;
       let day = d.getDate();
@@ -61,9 +67,9 @@ class APOD extends React.Component {
   render() {
     return (
       <>
-        {this.state.images.map((i) => {
-          return <ImageDisplay info={i} />;
-        })}
+        {this.state.images.map((i) => (
+          <ImageDisplay info={i} />
+        ))}
       </>
     );
   }
