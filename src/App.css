@@ -6,13 +6,40 @@
   color: white;
 }
 
+.app > .header {
+  width: 100%;
+  height: 10rem;
+  background-color: #000000;
+  font-size: 3rem;
+}
+
 .app > .container {
   display: grid;
   grid-template-columns: repeat(3, minmax(160px, 1fr));
+  grid-template-rows: repeat(auto-fit);
   grid-gap: 1rem;
   margin: auto;
   background-image: linear-gradient(#000000, #303030);
   width: 80%;
+}
+
+.app > .container > .video-display {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+.app > .container > .video-display > #apod-video {
+  overflow: hidden;
+  position: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+.app > .container > .video-display > .show-modal-button {
+  float: bottom;
+  width: 100%;
 }
 
 .app > .container > .image-display {
@@ -60,6 +87,11 @@
   margin: 2px;
   display: flex;
   align-items: center;
+}
+
+.modal > .modal-content > .modal-box > #apod-video {
+  width: 100%;
+  height: 100%;
 }
 
 .modal > .modal-content > .modal-box > .modal-information {

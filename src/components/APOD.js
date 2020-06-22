@@ -1,7 +1,7 @@
 import React from "react";
 import ImageDisplay from "./ImageDisplay";
 
-const NUM_OF_IMAGES = 9;
+const NUM_OF_IMAGES = 18;
 
 class APOD extends React.Component {
   constructor() {
@@ -29,20 +29,22 @@ class APOD extends React.Component {
         return response.json();
       })
       .then((data) => {
-        let o = {
-          imageSource: data.url,
-          hdSource: data.hdurl,
-          description: data.explanation,
-          title: data.title,
-          date: data.date,
-        };
-        let newArray = this.state.images;
-        newArray.push(o);
+        if (data.url != null) {
+          let o = {
+            imageSource: data.url,
+            hdSource: data.hdurl,
+            description: data.explanation,
+            title: data.title,
+            date: data.date,
+          };
+          let newArray = this.state.images;
+          newArray.push(o);
 
-        newArray.sort((a, b) => (a.date < b.date ? 1 : -1));
-        console.log(newArray);
+          newArray.sort((a, b) => (a.date < b.date ? 1 : -1));
+          console.log(newArray);
 
-        this.setState({ images: newArray });
+          this.setState({ images: newArray });
+        }
       })
       .catch((error) => {
         console.log(error);
