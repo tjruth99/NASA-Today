@@ -25,7 +25,7 @@ class ImageDisplay extends React.Component {
               src={this.props.info.imageSource}
               title={this.props.info.title}
               frameBorder="0"
-              id="apod-video"
+              className="apod-video"
             />
 
             <Modal onClose={this.showModal} show={this.state.show}>
@@ -56,7 +56,7 @@ class ImageDisplay extends React.Component {
             <img
               src={this.props.info.imageSource}
               alt="APOD"
-              id="apod-image"
+              className="apod-image"
               onClick={this.showModal}
             />
             <Modal onClose={this.showModal} show={this.state.show}>

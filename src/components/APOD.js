@@ -15,11 +15,7 @@ class APOD extends React.Component {
   }
 
   addToList(year, month, day) {
-    let date = year + "-" + month + "-" + day;
-    let request =
-      "https://api.nasa.gov/planetary/apod?date=" +
-      date +
-      "&api_key=AaQ9U1djcIeHrpWVG2uEZeTuodH4QcoBngaoVsNI";
+    let request = `https://api.nasa.gov/planetary/apod?date=${year}-${month}-${day}&api_key=${process.env.REACT_APP_NASA_API_KEY}`;
     fetch(request, {
       method: "GET",
       headers: {
