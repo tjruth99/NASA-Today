@@ -21,19 +21,27 @@ class ImageDisplay extends React.Component {
       return (
         <>
           <div className="video-display">
-            <iframe
-              src={this.props.info.imageSource}
-              title={this.props.info.title}
-              frameBorder="0"
-              className="apod-video"
-            />
+            <div className="video-container">
+              <iframe
+                src={this.props.info.imageSource}
+                title={this.props.info.title}
+                frameBorder="0"
+                className="apod-video"
+                allowFullScreen="true"
+              />
+              <button className="show-modal-button" onClick={this.showModal}>
+                More Info
+              </button>
+            </div>
 
             <Modal onClose={this.showModal} show={this.state.show}>
               <div className="modal-box">
                 <iframe
                   src={this.props.info.imageSource}
                   title={this.props.info.title}
-                  id="apod-video"
+                  frameBorder="0"
+                  className="apod-video-modal"
+                  allowFullScreen="true"
                 />
               </div>
               <div className="modal-box">
@@ -55,7 +63,7 @@ class ImageDisplay extends React.Component {
           <div className="image-display">
             <img
               src={this.props.info.imageSource}
-              alt="APOD"
+              alt={this.props.info.title}
               className="apod-image"
               onClick={this.showModal}
             />
@@ -63,7 +71,7 @@ class ImageDisplay extends React.Component {
               <div className="modal-box">
                 <img
                   src={this.props.info.hdSource}
-                  alt="APOD"
+                  alt={this.props.info.title}
                   id="apod-hd-image"
                 />
               </div>
