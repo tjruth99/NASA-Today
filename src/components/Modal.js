@@ -16,7 +16,7 @@ class Modal extends React.Component {
                 onClick={(e) => this.onClose(e)}
                 className="modal-close-button"
               >
-                Close
+                &times;
               </button>
             </div>
           </div>
