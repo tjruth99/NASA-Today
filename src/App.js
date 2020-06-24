@@ -11,7 +11,7 @@ function App() {
         <img src={NASALogo} className="logo" alt="NASA Logo" />
         <span className="title">Astronomy Pictures of the Day</span>
       </div>
-      <div className="container">
+      <div className="content">
         <APOD />
       </div>
       <div className="footer">

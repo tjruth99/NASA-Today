@@ -8,7 +8,10 @@ class APOD extends React.Component {
     super();
     this.state = {
       images: [],
+      length: 0,
     };
+
+    this.loadMoreImages = this.loadMoreImages.bind(this);
   }
 
   addToList(year, month, day) {
@@ -43,13 +46,31 @@ class APOD extends React.Component {
           newArray.sort((a, b) => (a.date < b.date ? 1 : -1));
           console.log(newArray);
 
-          this.setState({ images: newArray });
+          this.setState({ images: newArray, length: newArray.length });
         }
       })
       .catch((error) => {
         console.log(error);
         alert("Server Timeout");
       });
+  }
+
+  loadMoreImages() {
+    let d = new Date();
+
+    let num = this.state.length;
+
+    d.setDate(d.getDate() - num);
+
+    for (let i = 0; i < NUM_OF_IMAGES; i++) {
+      let year = d.getFullYear();
+      let month = d.getMonth() + 1;
+      let day = d.getDate();
+
+      this.addToList(year, month, day);
+
+      d.setDate(d.getDate() - 1);
+    }
   }
 
   componentDidMount() {
@@ -69,9 +90,14 @@ class APOD extends React.Component {
   render() {
     return (
       <>
-        {this.state.images.map((i) => (
-          <ImageDisplay info={i} />
-        ))}
+        <div className="container">
+          {this.state.images.map((i) => (
+            <ImageDisplay info={i} />
+          ))}
+        </div>
+        <button className="extend-button" onClick={this.loadMoreImages}>
+          More Images
+        </button>
       </>
     );
   }

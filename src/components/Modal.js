@@ -10,8 +10,8 @@ class Modal extends React.Component {
       return (
         <>
           <div className="modal" onClick={(e) => this.onClose(e)}>
-            <div className="modal-content">{this.props.children}</div>
-            <div>
+            <div className="modal-content">
+              {this.props.children}
               <button
                 onClick={(e) => this.onClose(e)}
                 className="modal-close-button"
