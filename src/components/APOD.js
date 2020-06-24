@@ -20,7 +20,6 @@ class APOD extends React.Component {
       "https://api.nasa.gov/planetary/apod?date=" +
       date +
       "&api_key=AaQ9U1djcIeHrpWVG2uEZeTuodH4QcoBngaoVsNI";
-    console.log(request);
     fetch(request, {
       method: "GET",
       headers: {
@@ -40,11 +39,11 @@ class APOD extends React.Component {
             title: data.title,
             date: data.date,
           };
+
           let newArray = this.state.images;
           newArray.push(o);
 
           newArray.sort((a, b) => (a.date < b.date ? 1 : -1));
-          console.log(newArray);
 
           this.setState({ images: newArray, length: newArray.length });
         }
