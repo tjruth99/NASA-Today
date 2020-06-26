@@ -51,34 +51,42 @@ class APOD extends React.Component {
   }
 
   loadMoreImages() {
-    let d = new Date();
+    if (process.env.REACT_APP_NASA_API_KEY == null) {
+      alert("No NASA API key found");
+    } else {
+      let d = new Date();
 
-    let num = this.state.length;
+      let num = this.state.length;
 
-    d.setDate(d.getDate() - num);
+      d.setDate(d.getDate() - num);
 
-    for (let i = 0; i < NUM_OF_IMAGES; i++) {
-      let year = d.getFullYear();
-      let month = d.getMonth() + 1;
-      let day = d.getDate();
+      for (let i = 0; i < NUM_OF_IMAGES; i++) {
+        let year = d.getFullYear();
+        let month = d.getMonth() + 1;
+        let day = d.getDate();
 
-      this.addToList(year, month, day);
+        this.addToList(year, month, day);
 
-      d.setDate(d.getDate() - 1);
+        d.setDate(d.getDate() - 1);
+      }
     }
   }
 
   componentDidMount() {
-    let d = new Date();
+    if (process.env.REACT_APP_NASA_API_KEY == null) {
+      alert("No NASA API key found");
+    } else {
+      let d = new Date();
 
-    for (let i = 0; i < NUM_OF_IMAGES; i++) {
-      let year = d.getFullYear();
-      let month = d.getMonth() + 1;
-      let day = d.getDate();
+      for (let i = 0; i < NUM_OF_IMAGES; i++) {
+        let year = d.getFullYear();
+        let month = d.getMonth() + 1;
+        let day = d.getDate();
 
-      this.addToList(year, month, day);
+        this.addToList(year, month, day);
 
-      d.setDate(d.getDate() - 1);
+        d.setDate(d.getDate() - 1);
+      }
     }
   }
 
