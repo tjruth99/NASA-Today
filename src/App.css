@@ -170,6 +170,28 @@
   font-size: 1rem;
 }
 
+#image-open-hd{
+  font-size: 0.95rem;
+}
+
+#image-open-hd-a{
+  color: #aaa;
+  border: 2px solid #505050;
+  border-radius: 5px;
+  padding: 5px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+#image-open-hd-a:visited{
+  color: #aaa;
+}
+
+#image-open-hd-a:hover{
+  color: white;
+  background-color: #505050;
+}
+
 .modal-close-button {
   border: 1px solid black;
   background-color: #222222;

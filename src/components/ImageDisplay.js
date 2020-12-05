@@ -70,7 +70,7 @@ class ImageDisplay extends React.Component {
             <Modal onClose={this.showModal} show={this.state.show}>
               <div className="modal-box">
                 <img
-                  src={this.props.info.hdSource}
+                  src={this.props.info.imageSource}
                   alt={this.props.info.title}
                   id="apod-hd-image"
                 />
@@ -82,6 +82,8 @@ class ImageDisplay extends React.Component {
                   <p id="image-date">{this.props.info.date}</p>
                   <br />
                   <p id="image-description">{this.props.info.description}</p>
+                  <br />
+                  <p id="image-open-hd"><a id="image-open-hd-a" href={this.props.info.hdSource} target="_blank" rel="noopener noreferrer">Open Full Size Image</a></p>
                 </div>
               </div>
             </Modal>
