@@ -1,3 +1,7 @@
+/*
+ * The modal to display more information for a given image/video such as the date it was posted to NASA, it's description, and a link to the high-resolution version
+ */
+
 import React from "react";
 
 class Modal extends React.Component {

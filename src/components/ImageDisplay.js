@@ -1,3 +1,8 @@
+/*
+  * Component to display an Image/Video from APOD
+  * When clicked, a modal will open with more information on the image
+  */
+
 import React from "react";
 import Modal from "./Modal";
 
@@ -20,6 +25,7 @@ class ImageDisplay extends React.Component {
     if (youtubeRegex.test(this.props.info.imageSource)) {
       return (
         <>
+          {/* The display of the video on the main page */}
           <div className="video-display">
             <div className="video-container">
               <iframe
@@ -35,6 +41,7 @@ class ImageDisplay extends React.Component {
             </div>
 
             <Modal onClose={this.showModal} show={this.state.show}>
+              {/* Pass the format of the modal information as a child to the Modal component */}
               <div className="modal-box">
                 <iframe
                   src={this.props.info.imageSource}
@@ -60,6 +67,7 @@ class ImageDisplay extends React.Component {
     } else {
       return (
         <>
+          {/* The display of the image on the main page */}
           <div className="image-display">
             <img
               src={this.props.info.imageSource}
@@ -68,6 +76,7 @@ class ImageDisplay extends React.Component {
               onClick={this.showModal}
             />
             <Modal onClose={this.showModal} show={this.state.show}>
+              {/* Pass the format of the modal information as a child to the Modal component */}
               <div className="modal-box">
                 <img
                   src={this.props.info.imageSource}

@@ -1,3 +1,7 @@
+/*
+ * This component was made to display Curiosity Rover images but decided to focus on APOD since those images were more diverse and more interesting to look at.
+ */
+
 import React from "react";
 
 class RoverImage extends React.Component {

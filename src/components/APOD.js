@@ -1,3 +1,7 @@
+/*
+ * The parent component to all images/videos from NASA's APOD. This component makes the calls to the API to get information for each image/video.
+ */
+
 import React from "react";
 import ImageDisplay from "./ImageDisplay";
 
@@ -14,6 +18,9 @@ class APOD extends React.Component {
     this.loadMoreImages = this.loadMoreImages.bind(this);
   }
 
+  /*
+   * Make an API call to NASA to fetch the picture for the given date and add it to the list of images
+   */
   addToList(year, month, day) {
     let request = `https://api.nasa.gov/planetary/apod?date=${year}-${month}-${day}&api_key=${process.env.REACT_APP_NASA_API_KEY}`;
     fetch(request, {
@@ -50,6 +57,9 @@ class APOD extends React.Component {
       });
   }
 
+  /*
+   * Called when user requests more images, add NUM_OF_IMAGES more images to the array
+   */
   loadMoreImages() {
     if (process.env.REACT_APP_NASA_API_KEY == null) {
       alert("No NASA API key found");
@@ -72,6 +82,9 @@ class APOD extends React.Component {
     }
   }
 
+  /*
+   * When the website opens, make NUM_OF_IMAGES calls to the API to fetch that many number of images to display
+   */
   componentDidMount() {
     if (process.env.REACT_APP_NASA_API_KEY == null) {
       alert("No NASA API key found");
